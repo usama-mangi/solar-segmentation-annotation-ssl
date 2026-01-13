@@ -1,0 +1,32 @@
+[project]
+name = "solar-ssl"
+version = "1.0.0"
+description = "Solar Segmentation SSL"
+readme = "README.md"
+# 1. FIX PYTHON VERSION (Stops the split error)
+requires-python = ">=3.10"
+dependencies = [
+    "gradio",
+    "matplotlib>=3.10.8",
+    "numpy",
+    "opencv-python",
+    "pillow",
+    "segment-anything @ git+https://github.com/facebookresearch/segment-anything.git",
+    "torch",
+    "torchvision",
+    "tqdm",
+]
+
+# 2. CONFIGURE INDEXES (Stops the Pillow error)
+[[tool.uv.index]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch" }
+torchvision = { index = "pytorch" }
+
+[tool.uv]
+# This allows uv to check PyPI if the package is old in the PyTorch index
+index-strategy = "unsafe-best-match"
